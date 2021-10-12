@@ -3,7 +3,7 @@ using Ecomm.Web.Models;
 
 namespace Ecomm.Web.Services.IServices
 {
-  public interface IProductService
+  public interface IProductService : IBaseService
   {
     /// <summary>
     /// method to request to get all the products

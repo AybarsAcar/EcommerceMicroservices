@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecomm.Web.Services;
+using Ecomm.Web.Services.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,15 @@ namespace Ecomm.Web
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+
+      // set our base api for the Product Api
+      Constants.ProductApiBase = Configuration["ServiceUrls:ProductAPI"];
+
+      // add our Product API as HttpClient
+      services.AddHttpClient<IProductService, IProductService>();
+
+      // add product service as a dependency
+      services.AddScoped<IProductService, ProductService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
