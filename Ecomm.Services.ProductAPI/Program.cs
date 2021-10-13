@@ -31,7 +31,7 @@ namespace Ecomm.Services.ProductAPI
         catch (Exception e)
         {
           var logger = services.GetRequiredService<ILogger<Program>>();
-          logger.LogError(e, "An error occured during m igration");
+          logger.LogError(e, "An error occured during migration");
         }
       }
 
@@ -40,6 +40,10 @@ namespace Ecomm.Services.ProductAPI
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
       Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+          webBuilder.UseStartup<Startup>();
+          webBuilder.UseUrls("http://localhost:5003", "https://localhost:5004");
+        });
   }
 }
